@@ -16,8 +16,7 @@
     (map #(if (str/blank? %)
             nil
             (Integer/parseInt %)))
-    (count-calories)
-    ))
+    (count-calories)))
 
 (defn part1 [input]
   (apply max input))
