@@ -7,7 +7,7 @@ fn main() {
         .nth(1)
         .and_then(|filename| File::open(filename).ok()) 
     else {
-        println!("Please pass in the input file");
+        println!("Please pass in a valid input file");
         return;
     };
 
