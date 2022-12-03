@@ -1,14 +1,7 @@
-use std::fs::File;
-use std::io::prelude::*;
-
-pub fn day_one() {
-    let mut file = File::open("../input/day1.txt").unwrap();
-    let mut contents = String::new();
-    file.read_to_string(&mut contents).unwrap();
-
+pub fn day_one(input: String) {
     let mut elves = vec![0];
 
-    for line in contents.lines() {
+    for line in input.lines() {
         if line.is_empty() {
             elves.push(0);
         } else {

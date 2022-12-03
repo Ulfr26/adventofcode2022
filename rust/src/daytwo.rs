@@ -1,11 +1,4 @@
-use std::fs::File;
-use std::io::prelude::*;
-
-pub fn day_two() {
-    let mut file = File::open("../input/day2.txt").unwrap();
-    let mut input = String::new();
-    file.read_to_string(&mut input).unwrap();
-
+pub fn day_two(input: String) {
     let input = input
         .lines()
         .filter(|line| !line.is_empty())

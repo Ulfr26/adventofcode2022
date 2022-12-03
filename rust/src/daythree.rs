@@ -1,12 +1,6 @@
-use std::fs::File;
-use std::io::prelude::*;
 use itertools::Itertools;
 
-pub fn day_three() {
-    let mut file = File::open("../input/day3.txt").unwrap();
-    let mut input = String::new();
-    file.read_to_string(&mut input).unwrap();
-
+pub fn day_three(input: String) {
     println!("The answer to part one is {}", part_one(&input));
     println!("The answer to part two is {}", part_two(&input));
 }
