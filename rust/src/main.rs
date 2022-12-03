@@ -1,8 +1,10 @@
 mod dayone;
 mod daytwo;
+mod daythree;
 
 use dayone::*;
 use daytwo::*;
+use daythree::*;
 use std::env;
 
 fn main() {
@@ -17,6 +19,7 @@ fn main() {
     match day {
         1 => day_one(),
         2 => day_two(),
+        3 => day_three(),
         _ => println!("Not a valid day!"),
     }
 }
