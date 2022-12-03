@@ -13,9 +13,9 @@ pub fn day_three() {
 
 fn priority(c: char) -> u32 {
     if c.is_ascii_lowercase() {
-        c as u32 - 96
+        c as u32 - 'a' as u32 + 1
     } else if c.is_ascii_uppercase() {
-        c as u32 - 64 + 26
+        c as u32 - 'A' as u32 + 27
     } else {
         panic!("Not an alphabetical character!");
     }
