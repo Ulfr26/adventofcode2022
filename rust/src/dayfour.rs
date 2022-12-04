@@ -6,14 +6,11 @@ fn parse_input(input: String) -> Vec<Assignment> {
     let mut res = Vec::new();
 
     for line in input.lines().filter(|line| !line.is_empty()) {
-        let pair = line.split(",")
-            .map(|range| {
-                range.split("-").map(|str| str.parse::<usize>().unwrap()).collect_vec()
-            })
-            .map(|vec| (vec[0], vec[1]))
+        let pair = line.split(&[',', '-'])
+            .map(|s| s.parse::<usize>().unwrap())
             .collect_vec();
 
-        res.push((pair[0], pair[1]))
+        res.push(((pair[0], pair[1]), (pair[2], pair[3])));
     }
 
     return res;
