@@ -1,10 +1,12 @@
 mod dayone;
 mod daytwo;
 mod daythree;
+mod dayfour;
 
 use dayone::*;
 use daytwo::*;
 use daythree::*;
+use dayfour::*;
 use std::env;
 use std::fs::File;
 use std::io::{Read, self};
@@ -34,6 +36,7 @@ fn main() {
         1 => day_one(input),
         2 => day_two(input),
         3 => day_three(input),
+        4 => day_four(input),
         _ => println!("Not a valid day!"),
     }
 }
