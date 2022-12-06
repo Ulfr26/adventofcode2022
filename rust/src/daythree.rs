@@ -16,7 +16,8 @@ fn priority(c: char) -> u32 {
 }
 
 fn part_one(input: &str) -> u32 {
-    input.lines()
+    input
+        .lines()
         .filter(|line| !line.is_empty())
         .map(|string| {
             let mid = string.len() / 2;
@@ -35,7 +36,8 @@ fn part_one(input: &str) -> u32 {
 }
 
 fn part_two(input: &str) -> u32 {
-    input.lines()
+    input
+        .lines()
         .filter(|line| !line.is_empty())
         .tuples::<(_, _, _)>()
         .map(|(p1, p2, p3)| {

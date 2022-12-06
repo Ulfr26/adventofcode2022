@@ -20,22 +20,25 @@ pub fn day_two(input: String) {
 }
 
 fn part_one(input: &Vec<(i32, i32)>) -> i32 {
-    input.iter()
-        .map(|&(elf_move, my_move)|
-            my_move + if elf_move % 3 == my_move - 1 {
-                6
-            } else if elf_move == my_move {
-                3
-            } else {
-                0
-            }
-        )
+    input
+        .iter()
+        .map(|&(elf_move, my_move)| {
+            my_move
+                + if elf_move % 3 == my_move - 1 {
+                    6
+                } else if elf_move == my_move {
+                    3
+                } else {
+                    0
+                }
+        })
         .sum()
 }
 
 fn part_two(input: &Vec<(i32, i32)>) -> i32 {
-    input.iter()
-        .map(|&(elf_move, outcome)|
+    input
+        .iter()
+        .map(|&(elf_move, outcome)| {
             if outcome == 1 {
                 (elf_move - 2).rem_euclid(3) + 1
             } else if outcome == 2 {
@@ -43,6 +46,6 @@ fn part_two(input: &Vec<(i32, i32)>) -> i32 {
             } else {
                 (elf_move % 3) + 7
             }
-        )
+        })
         .sum()
 }

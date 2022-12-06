@@ -1,17 +1,19 @@
-mod dayone;
-mod daytwo;
-mod daythree;
-mod dayfour;
 mod dayfive;
+mod dayfour;
+mod dayone;
+mod daysix;
+mod daythree;
+mod daytwo;
 
-use dayone::*;
-use daytwo::*;
-use daythree::*;
-use dayfour::*;
 use dayfive::*;
+use dayfour::*;
+use dayone::*;
+use daysix::*;
+use daythree::*;
+use daytwo::*;
 use std::env;
 use std::fs::File;
-use std::io::{Read, self};
+use std::io::{self, Read};
 
 fn input(day: usize) -> Result<String, io::Error> {
     let mut file = File::open(&format!("../input/day{day}.txt"))?;
@@ -40,6 +42,7 @@ fn main() {
         3 => day_three(input),
         4 => day_four(input),
         5 => day_five(input),
+        6 => day_six(input),
         _ => println!("Not a valid day!"),
     }
 }
