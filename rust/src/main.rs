@@ -1,9 +1,12 @@
+// CARGO FMT KEEPS SORTING THESE IN ALPHABETICAL ORDER
+// AAAAAAAAAAAAAAAAAAAAAAAAAA
 mod dayfive;
 mod dayfour;
 mod dayone;
 mod daysix;
 mod daythree;
 mod daytwo;
+mod dayseven;
 
 use dayfive::*;
 use dayfour::*;
@@ -11,6 +14,7 @@ use dayone::*;
 use daysix::*;
 use daythree::*;
 use daytwo::*;
+use dayseven::*;
 use std::env;
 use std::fs::File;
 use std::io::{self, Read};
@@ -43,6 +47,7 @@ fn main() {
         4 => day_four(input),
         5 => day_five(input),
         6 => day_six(input),
+        7 => day_seven(input),
         _ => println!("Not a valid day!"),
     }
 }
