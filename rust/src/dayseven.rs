@@ -1,7 +1,7 @@
 // This code is fucking awful and i hope no future employer sees it
-use std::rc::{ Rc, Weak };
 use std::cell::RefCell;
 use std::collections::HashMap;
+use std::rc::{Rc, Weak};
 
 const SPACE_NEEDED: u32 = 30000000;
 const TOTAL_SPACE: u32 = 70000000;
@@ -54,12 +54,10 @@ fn parse_line(line: &str) -> Command {
 
 impl<'a> FileSystem<'a> {
     fn parse(input: &'a str) -> FileSystem<'a> {
-        let root = Rc::new(RefCell::new(
-            Directory {
-                parent: None,
-                children: HashMap::new(),
-            }
-        ));
+        let root = Rc::new(RefCell::new(Directory {
+            parent: None,
+            children: HashMap::new(),
+        }));
 
         let mut current = Rc::clone(&root);
 
@@ -70,16 +68,14 @@ impl<'a> FileSystem<'a> {
             }
 
             match parse_line(line) {
-                Command::Ls => {},
+                Command::Ls => {}
 
                 Command::Cd("..") => {
                     let new = {
                         let parent = &current.borrow().parent;
 
                         Rc::clone(&match parent {
-                            Some(reference) => {
-                                reference.upgrade().unwrap()
-                            },
+                            Some(reference) => reference.upgrade().unwrap(),
 
                             None => unreachable!(),
                         })
@@ -90,34 +86,46 @@ impl<'a> FileSystem<'a> {
 
                 Command::Cd(dir) => {
                     let parent = Rc::downgrade(&current);
-                    current = {
-                        let mut borrowed_current = current.borrow_mut();
+                    current =
+                        {
+                            let mut borrowed_current = current.borrow_mut();
 
-                        let next = borrowed_current.children.entry(dir).or_insert(FileNode::Directory(Rc::new(RefCell::new(Directory {
-                            parent: Some(parent),
-                            children: HashMap::new(),
-                        }))));
+                            let next = borrowed_current.children.entry(dir).or_insert(
+                                FileNode::Directory(Rc::new(RefCell::new(Directory {
+                                    parent: Some(parent),
+                                    children: HashMap::new(),
+                                }))),
+                            );
 
-                        match &*next {
-                            FileNode::Directory(reference) => Rc::clone(&reference),
-                            FileNode::File(_) => unreachable!(),
-                        }
-                    };
-                },
+                            match &*next {
+                                FileNode::Directory(reference) => Rc::clone(&reference),
+                                FileNode::File(_) => unreachable!(),
+                            }
+                        };
+                }
 
                 Command::File(name, size) => {
-                    current.borrow_mut().children.insert(name, FileNode::File(size));
-                },
+                    current
+                        .borrow_mut()
+                        .children
+                        .insert(name, FileNode::File(size));
+                }
 
                 Command::Directory(name) => {
-                    current.borrow_mut().children.insert(name, FileNode::Directory(
-                        Rc::new(RefCell::new(Directory { parent: Some(Rc::downgrade(&current)), children: HashMap::new() }))
-                    ));
+                    current.borrow_mut().children.insert(
+                        name,
+                        FileNode::Directory(Rc::new(RefCell::new(Directory {
+                            parent: Some(Rc::downgrade(&current)),
+                            children: HashMap::new(),
+                        }))),
+                    );
                 }
             }
         }
 
-        return FileSystem { root: FileNode::Directory(root) }
+        return FileSystem {
+            root: FileNode::Directory(root),
+        };
     }
 }
 
@@ -132,7 +140,7 @@ impl<'a> FileNode<'a> {
     // to `vec`
     fn directory_sizes_helper(&self, vec: &mut Vec<u32>) -> u32 {
         match &*self {
-            &FileNode::File(size) =>  size,
+            &FileNode::File(size) => size,
 
             FileNode::Directory(dir) => {
                 let dir = dir.borrow();
@@ -156,7 +164,8 @@ pub fn day_seven(input: String) {
 }
 
 fn part_one(fs: &FileSystem) -> u32 {
-    fs.root.directory_sizes()
+    fs.root
+        .directory_sizes()
         .into_iter()
         .filter(|&size| size < 100000)
         .sum()
@@ -170,7 +179,5 @@ fn part_two<'a>(fs: &FileSystem<'a>) -> u32 {
     let free_space = TOTAL_SPACE - used;
     let target = SPACE_NEEDED - free_space;
 
-    sizes.into_iter()
-        .find(|&size| size >= target) 
-        .unwrap()
+    sizes.into_iter().find(|&size| size >= target).unwrap()
 }

@@ -1,5 +1,5 @@
-use std::{collections::HashSet, hash::Hash};
 use itertools::Itertools;
+use std::{collections::HashSet, hash::Hash};
 
 pub fn day_six(input: String) {
     part_one(&input);
@@ -9,7 +9,7 @@ pub fn day_six(input: String) {
 // This is a generic for no reason other than it's fun
 fn all_unique<T: Eq + Copy + Hash>(slice: &[T]) -> bool {
     let mut set = HashSet::new();
-    
+
     for elem in slice.iter() {
         if !set.insert(elem) {
             return false;
